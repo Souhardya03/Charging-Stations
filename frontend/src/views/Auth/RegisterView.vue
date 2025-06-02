@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
 import { ref } from 'vue'
 import { useRegisterMutation } from '@/store/queries/auth'
 import { toast } from 'vue3-toastify'
@@ -8,7 +8,7 @@ const form = ref({
   email: '',
   password: '',
 })
-
+const router = useRoute()
 const { mutateAsync: register } = useRegisterMutation()
 
 const handleSubmit = async () => {
@@ -28,7 +28,7 @@ const handleSubmit = async () => {
           progress: undefined,
         })
       }, 100)
-      window.location.href = '/login'
+      router.push('/login')
     }
   } catch (error) {
     toast.error(error.response?.data?.message,{
