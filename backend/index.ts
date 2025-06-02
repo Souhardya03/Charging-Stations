@@ -14,6 +14,7 @@ import StationRouter from "./routes/Station";
 app.use(cors({
 		origin: [
 			process.env.FORNTEND_URI_DEV as string,
+			process.env.FORNTEND_URI_PROD as string,
 		],
 		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 		credentials: true,
