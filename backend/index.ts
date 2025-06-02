@@ -25,7 +25,7 @@ app.use(express.json());
 app.use("/v1/api", UserRouter);
 app.use("/v1/api/station", StationRouter);
 app.get("/", (req: Request, res: Response) => {
-	res.send("Hello from TypeScript Express!");
+	res.send("Hello from Express Server!");
 });
 
 // Database connection
