@@ -54,18 +54,16 @@ export const loginUser = asyncHandler(async (req: any, res: any) => {
 		const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET as string, {
 			expiresIn: "1h",
 		});
-		const response = res.cookie("token", token, {
+		res.cookie("token", token, {
 			httpOnly: true,
 			secure: true,
-			sameSite: "none", 
+			sameSite: "none",
 			maxAge: 3600000,
-			domain: "charging-stations-itp3.vercel.app", // Adjust based on your domain
+			// Remove domain for local testing or set to your frontend domain in production
+			// domain: "charging-stations-itp3.vercel.app",
 		});
-		if (!response) {
-			return res.status(500).json({ message: "Failed to set cookie" });
-		}
 
-		return response.status(200).json({ message: "Login successful", token });
+		return res.status(200).json({ message: "Login successful", token });
 	} catch (error) {
 		return res.status(500).json({ message: "Internal server error" });
 	}
