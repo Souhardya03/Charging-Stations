@@ -5,15 +5,7 @@ import Cookies from 'js-cookie'
 export const useLoginMutation = () => {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: async (data) => {
-      const response = await login(data)
-      // Set cookie manually after successful login
-      if (response && response.token) {
-        Cookies.set('token', response.token, { secure: true, sameSite: 'strict' })
-      }
-      return response
-    },
-    
+    mutationFn: (data) => login(data),
     onSuccess: () => {
       queryClient.invalidateQueries(['login'])
     },
