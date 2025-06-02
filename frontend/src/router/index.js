@@ -4,7 +4,6 @@ import LoginView from '../views/Auth/LoginView.vue'
 import RegisterView from '../views/Auth/RegisterView.vue'
 import LogoutView from '../views/Auth/LogoutView.vue'
 import DashboardView from '../views/Dashboard/DashboardView.vue'
-import Cookies from 'js-cookie'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -37,7 +36,7 @@ const router = createRouter({
   
 })
 router.beforeEach((to, from, next) => {
-  const token = Cookies.get('token'); 
+  const token = localStorage.getItem('token'); 
  
   if (token && to.name === 'login') {
     next({ name: 'home' });
