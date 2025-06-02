@@ -59,7 +59,7 @@ export const loginUser = asyncHandler(async (req: any, res: any) => {
 			secure: true,
 			sameSite: "none",
 			path: "/",
-			domain: ".vercel.app",
+			domain: "charging-stations-itp3.vercel.app",
 			maxAge: 3600000,
 		});
 
