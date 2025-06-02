@@ -5,7 +5,12 @@ const api = axios.create({
   withCredentials: true,
 })
 
-export const login = (data) => api.post('/login', data).then((res) => res)
+export const login = (data) => api.post('/login', data,{
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+}).then((res) => res)
 
 export const register = (data) => api.post('/register', data).then((res) => res)
 

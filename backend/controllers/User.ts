@@ -59,8 +59,6 @@ export const loginUser = asyncHandler(async (req: any, res: any) => {
 			secure: true,
 			sameSite: "none",
 			maxAge: 3600000,
-			// Remove domain for local testing or set to your frontend domain in production
-			// domain: "charging-stations-itp3.vercel.app",
 		});
 
 		return res.status(200).json({ message: "Login successful", token });
