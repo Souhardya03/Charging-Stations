@@ -63,13 +63,12 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import Cookie from 'js-cookie';
 
 const stations = ref([]);
 let map;
 let markersLayer;
 const filters = ref({status: '', powerOutput: '', connectorType: ''});
-const token = Cookie.get('token')
+const token = localStorage.getItem('token')
 
 const fetchStations = async () => {
   const query = new URLSearchParams(filters.value).toString();

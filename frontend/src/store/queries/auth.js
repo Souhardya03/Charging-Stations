@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query'
 import { login, logout, register } from '../api/auth'
-import Cookies from 'js-cookie'
 
 export const useLoginMutation = () => {
   const queryClient = useQueryClient()
@@ -36,7 +35,7 @@ export function useAuthQuery() {
   return useQuery({
     queryKey: ['auth'],
     queryFn: () => {
-      const token = Cookies.get('token')
+      const token = localStorage.getItem('token')
       if (!token) throw new Error('Not authenticated')
       return { token }
     },

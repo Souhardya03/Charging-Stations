@@ -15,6 +15,7 @@ const handleSubmit = async () => {
     const response = await login(form.value)
     if (response.status === 200) {
       router.push('/')
+      localStorage.setItem('token', response.data.token)
       setTimeout(() => {
         toast.success('Login successful',{
           position: 'top-center',
