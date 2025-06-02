@@ -58,7 +58,7 @@ export const loginUser = asyncHandler(async (req: any, res: any) => {
 			httpOnly: true,
 			secure: true,
 			// Adjust based on your requirements
-			domain: process.env.NODE_ENV === "production" ? ".onrender.com" : undefined, // Set for Render deployment
+			domain: ".onrender.com",
 			path: "/",
 			maxAge: 3600000,
 		});
