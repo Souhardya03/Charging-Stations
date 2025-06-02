@@ -55,10 +55,11 @@ export const loginUser = asyncHandler(async (req: any, res: any) => {
 			expiresIn: "1h",
 		});
 		const response = res.cookie("token", token, {
-			// httpOnly: true,
-			// secure: false,
-			// sameSite: "none",
-			maxAge: 3600000, // 1 hour
+			httpOnly: true,
+			secure: true,
+			sameSite: "none", 
+			maxAge: 3600000,
+			domain: process.env.FORNTEND_URI_PROD || undefined, 
 		});
 		if (!response) {
 			return res.status(500).json({ message: "Failed to set cookie" });
