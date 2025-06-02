@@ -33,7 +33,7 @@ const isCurrent = (href) => route.path === href
         </div>
         <div class="flex flex-1 gap-4 items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex shrink-0 items-center">
-            <img class="h-10 w-auto" src="../../src/assets/logo.svg" alt="Your Company" />
+            <img class="h-10 w-auto" src="/src/assets/logo.svg" alt="Your Company" />
           </div>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
