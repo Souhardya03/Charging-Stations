@@ -5,7 +5,7 @@ import Cookies from 'js-cookie'
 export const useLoginMutation = () => {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: (data) => login(dat),
+    mutationFn: (data) => login(data),
     onSuccess: () => {
       queryClient.invalidateQueries(['login'])
     },
