@@ -59,7 +59,7 @@ export const loginUser = asyncHandler(async (req: any, res: any) => {
 			secure: true,
 			sameSite: "none", 
 			maxAge: 3600000,
-			domain: ".vercel.app", // Adjust based on your domain
+			domain: "charging-stations-itp3.vercel.app", // Adjust based on your domain
 		});
 		if (!response) {
 			return res.status(500).json({ message: "Failed to set cookie" });
