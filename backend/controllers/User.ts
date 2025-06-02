@@ -56,8 +56,9 @@ export const loginUser = asyncHandler(async (req: any, res: any) => {
 		});
 		res.cookie("token", token, {
 			httpOnly: true,
-			secure: process.env.NODE_ENV === "production",
-			sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+			secure: true,
+			// Adjust based on your requirements
+			domain: process.env.NODE_ENV === "production" ? ".onrender.com" : undefined, // Set for Render deployment
 			path: "/",
 			maxAge: 3600000,
 		});
