@@ -59,7 +59,7 @@ export const loginUser = asyncHandler(async (req: any, res: any) => {
 			secure: true,
 			sameSite: "none", 
 			maxAge: 3600000,
-			domain: process.env.FORNTEND_URI_PROD || undefined, 
+			// domain: process.env.FORNTEND_URI_PROD || undefined, 
 		});
 		if (!response) {
 			return res.status(500).json({ message: "Failed to set cookie" });
