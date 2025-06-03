@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink, useRoute } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { ref } from 'vue'
 import { useRegisterMutation } from '@/store/queries/auth'
 import { toast } from 'vue3-toastify'
@@ -8,17 +8,16 @@ const form = ref({
   email: '',
   password: '',
 })
-const router = useRoute()
+const router = useRouter()
 const { mutateAsync: register } = useRegisterMutation()
 
 const handleSubmit = async () => {
   try {
     const response = await register(form.value)
-    console.log('Response:', response);
-    
     if (response.status === 201) {
+      
       setTimeout(() => {
-        toast.success('Registration successful',{
+        toast.success('Registration successful', {
           position: 'top-center',
           autoClose: 2000,
           hideProgressBar: false,
@@ -31,15 +30,17 @@ const handleSubmit = async () => {
       router.push('/login')
     }
   } catch (error) {
-    toast.error(error.response?.data?.message,{
-      position: 'top-center',
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    })
+    if (error.response?.status === 400) {
+      toast.error(error.response.data.message, {
+        position: 'top-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+    }
   }
 }
 </script>
