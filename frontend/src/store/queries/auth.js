@@ -6,6 +6,9 @@ export const useLoginMutation = () => {
   return useMutation({
     mutationFn: async(data) => {const res = await login(data);
       localStorage.setItem('token', res.data.token);
+      setTimeout(() => {
+        localStorage.removeItem('token');
+      }, 1000 * 60 * 60 ); // 1 hour
       return res;
     },
     onSuccess: () => {
