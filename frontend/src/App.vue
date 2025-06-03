@@ -2,10 +2,12 @@
 import { RouterView } from 'vue-router'
 import { useAuthQuery } from '@/store/queries/auth'
 import Navbar from './components/Navbar.vue'
-const {isSuccess} = useAuthQuery()
+const authquery = useAuthQuery()
+console.log(authquery.data);
+
 </script>
 
 <template>
-  <Navbar v-if="isSuccess" />
+  <Navbar v-if="authquery.data.value" />
   <RouterView />
 </template>

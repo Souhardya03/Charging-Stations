@@ -69,10 +69,9 @@ let map;
 let markersLayer;
 const filters = ref({status: '', powerOutput: '', connectorType: ''});
 const token = localStorage.getItem('token')
-
 const fetchStations = async () => {
   const query = new URLSearchParams(filters.value).toString();
-  const res = await axios.get(`http://localhost:5000/v1/api/station?${query}`, {
+  const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/station?${query}`, {
     headers: { Authorization: `Bearer ${token}` }
   });  
   stations.value = res.data.stations.map(station => ({

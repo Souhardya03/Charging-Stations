@@ -133,7 +133,6 @@ import axios from 'axios';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-import Cookies from 'js-cookie';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png?url';
 import markerIcon from 'leaflet/dist/images/marker-icon.png?url';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png?url';
@@ -148,7 +147,7 @@ L.Icon.Default.mergeOptions({
 
 const stations = ref([]);
 const filters = ref({ status: '', powerOutput: '', connectorType: '' });
-const token = Cookies.get('token');
+const token = localStorage.getItem('token');
 const isUpdating = ref(false);
 const currentId = ref(null);
 let map;
@@ -163,7 +162,7 @@ const form = ref({
 
 const fetchStations = async () => {
   const query = new URLSearchParams(filters.value).toString();
-  const res = await axios.get(`http://localhost:5000/v1/api/station/user?${query}`, {
+  const res = await axios.get(`${import.meta.env.VITE_APP_API_URL}/station/user?${query}`, {
     headers: { Authorization: `Bearer ${token}` }
   });  
   stations.value = res.data.map(station => ({
@@ -184,9 +183,9 @@ const handleSubmit = async () => {
     longitude: form.value.location.longitude
   };
   if (isUpdating.value) {
-    await axios.patch(`http://localhost:5000/v1/api/station/update/${currentId.value}`, payload, headers);
+    await axios.patch(`${import.meta.env.VITE_APP_API_URL}/station/update/${currentId.value}`, payload, headers);
   } else {
-    await axios.post(`http://localhost:5000/v1/api/station/create`, payload, headers);
+    await axios.post(`${import.meta.env.VITE_APP_API_URL}/station/create`, payload, headers);
   }
   resetForm();
   fetchStations();
@@ -212,7 +211,7 @@ const cancelUpdate = () => {
 };
 
 const deleteStation = async (id) => {
-  await axios.delete(`http://localhost:5000/v1/api/station/delete/${id}`, {
+  await axios.delete(`${import.meta.env.VITE_APP_API_URL}/station/delete/${id}`, {
     headers: { Authorization: `Bearer ${token}` }
   });
   fetchStations();

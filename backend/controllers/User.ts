@@ -33,7 +33,7 @@ export const registerUser = async (req: any, res: any) => {
 //Login user
 export const loginUser = asyncHandler(async (req: any, res: any) => {
 	try {
-		const { email, password } = req.body;
+		const { email, password } = req.body;		
 		if (!email || !password) {
 			return res.status(400).json({ message: "All fields are required" });
 		}
@@ -57,11 +57,11 @@ export const loginUser = asyncHandler(async (req: any, res: any) => {
 		res.cookie("token", token, {
 			httpOnly: true,
 			secure: true,
-			// Adjust based on your requirements
 			domain: ".onrender.com",
 			path: "/",
 			maxAge: 3600000,
 		});
+
 
 		return res.status(200).json({ message: "Login successful", token });
 	} catch (error) {

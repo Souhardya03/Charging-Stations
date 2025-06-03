@@ -4,7 +4,10 @@ import { login, logout, register } from '../api/auth'
 export const useLoginMutation = () => {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: (data) => login(data),
+    mutationFn: async(data) => {const res = await login(data);
+      localStorage.setItem('token', res.data.token);
+      return res;
+    },
     onSuccess: () => {
       queryClient.invalidateQueries(['login'])
     },
@@ -35,9 +38,9 @@ export function useAuthQuery() {
   return useQuery({
     queryKey: ['auth'],
     queryFn: () => {
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem('token')      
       if (!token) throw new Error('Not authenticated')
-      return { token }
+      return token 
     },
     retry: false,
     staleTime: Infinity,

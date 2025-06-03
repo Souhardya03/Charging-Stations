@@ -13,9 +13,10 @@ const { mutateAsync: login } = useLoginMutation()
 const handleSubmit = async () => {
   try {
     const response = await login(form.value)
+    console.log(response);
+    
     if (response.status === 200) {
       router.push('/')
-      localStorage.setItem('token', response.data.token)
       setTimeout(() => {
         toast.success('Login successful',{
           position: 'top-center',

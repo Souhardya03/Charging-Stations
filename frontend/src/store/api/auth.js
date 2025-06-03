@@ -9,4 +9,8 @@ export const login = (data) => api.post('/login', data).then((res) => res)
 
 export const register = (data) => api.post('/register', data).then((res) => res)
 
-export const logout = () => api.post('/logout').then((res) => res)
+export const logout = () => api.post('/logout',{
+  headers: {
+    authorization: `Bearer ${localStorage.getItem('token')}`,
+  },
+}).then((res) => res)
